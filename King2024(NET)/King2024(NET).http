@@ -1,0 +1,6 @@
+@King2024_NET__HostAddress = http://localhost:5236
+
+GET {{King2024_NET__HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
