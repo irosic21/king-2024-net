@@ -21,7 +21,12 @@ namespace King2024_NET_.Business.Services
 
         public async Task<List<Product>> FilterProductsAsync(string category, decimal? minPrice, decimal? maxPrice)
         {
-            throw new NotImplementedException();
+            var allProducts = await GetAllProductsAsync();
+            var filteredProducts = allProducts.Where(p =>
+                (string.IsNullOrEmpty(category) || p.Category.Contains(category, StringComparison.OrdinalIgnoreCase)) &&
+                (!minPrice.HasValue || p.Price >= minPrice.Value) &&
+                (!maxPrice.HasValue || p.Price <= maxPrice.Value)).ToList();
+            return filteredProducts;
         }
 
         public async Task<List<Product>> GetAllProductsAsync()

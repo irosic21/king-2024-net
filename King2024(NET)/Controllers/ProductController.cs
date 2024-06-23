@@ -37,5 +37,12 @@ namespace King2024_NET_.Controllers
             var products = await _productServices.SearchProductsAsync(searchText);
             return Ok(products);
         }
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> FilterProducts([FromQuery] string category, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice)
+        {
+            var products = await _productServices.FilterProductsAsync(category, minPrice, maxPrice);
+            return Ok(products);
+        }
     }
 }
