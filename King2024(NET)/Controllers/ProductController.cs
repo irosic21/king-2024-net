@@ -29,5 +29,13 @@ namespace King2024_NET_.Controllers
             if (product == null) return NotFound();
             return Ok(product);
         }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string searchText)
+        {
+            if (searchText == null) return BadRequest();
+            var products = await _productServices.SearchProductsAsync(searchText);
+            return Ok(products);
+        }
     }
 }

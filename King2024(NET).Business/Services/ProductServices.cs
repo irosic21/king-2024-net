@@ -55,7 +55,12 @@ namespace King2024_NET_.Business.Services
 
         public async Task<List<Product>> SearchProductsAsync(string searchText)
         {
-            throw new NotImplementedException();
+            var allProducts = await GetAllProductsAsync();
+            var filteredProducts = allProducts
+                .Where(p => p.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            return filteredProducts;
         }
     }
 }
