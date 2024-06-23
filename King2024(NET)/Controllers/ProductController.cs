@@ -21,5 +21,13 @@ namespace King2024_NET_.Controllers
             var products = await _productServices.GetAllProductsAsync();
             return Ok(products);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            var product = await _productServices.GetProductByIdAsync(id);
+            if (product == null) return NotFound();
+            return Ok(product);
+        }
     }
 }

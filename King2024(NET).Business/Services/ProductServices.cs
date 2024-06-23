@@ -40,7 +40,17 @@ namespace King2024_NET_.Business.Services
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetFromJsonAsync<ProductDTO>(url + id);
+            var product = new Product
+            {
+                Id = response.Id,
+                Name = response.Title,
+                Price = response.Price,
+                ShortDescription = response.Description,
+                Category = response.Category,
+                Image = response.Thumbnail
+            };
+            return product;
         }
 
         public async Task<List<Product>> SearchProductsAsync(string searchText)
